@@ -131,6 +131,50 @@ function wouldKingBeInCheck(board: SquareData[][], move: Move): boolean {
   return isSquareAttacked(newBoard, kingPos, oppositeColor(move.piece.color))
 }
 
+export function isInCheck(board: SquareData[][], player: Color): boolean {
+  const kingPos = findKing(board, player)
+  if (!kingPos) return true
+  return isSquareAttacked(board, kingPos, oppositeColor(player))
+}
+
+export function isCheckmate(board: SquareData[][], player: Color): boolean {
+  // Si le roi n'est même pas en échec, ce n'est pas un mat
+  if (!isInCheck(board, player)) {
+    return false
+  }
+
+  // Parcours de toutes les pièces du joueur
+  for (let y = 0; y < 8; y++) {
+    for (let x = 0; x < 8; x++) {
+      const square = board[y][x]
+      const piece = square.piece
+      if (piece && piece.color === player) {
+        // On teste tous les mouvements possibles de cette pièce
+        for (let ty = 0; ty < 8; ty++) {
+          for (let tx = 0; tx < 8; tx++) {
+            const move: Move = {
+              from: { x, y },
+              to: { x: tx, y: ty },
+              piece
+            }
+            if (isMoveLegal(board, move)) {
+              // Simule le déplacement
+              const newBoard = simulateMove(board, move)
+              if (!isInCheck(newBoard, player)) {
+                // Il existe un coup qui évite l’échec → pas mat
+                return false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Aucune sortie d'échec trouvée
+  return true
+}
+
 /**
  * Vérifie si une case est attaquée par une pièce de la couleur indiquée.
  */

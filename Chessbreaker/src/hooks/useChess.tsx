@@ -1,18 +1,24 @@
-// src/hooks/useChessGame.ts
-
 import { useState } from 'react'
 import { Color, SquareData, Piece, Move } from '../game/types'
-import { isMoveLegal } from '../game/rules'
+import { isMoveLegal, isCheckmate } from '../game/rules'
+
+// Ex : isCheckmate(board, nextPlayer) → boolean
+// Tu implémentes le vrai code dans `rules.ts`
 
 export function useChessGame() {
   const [board, setBoard] = useState<SquareData[][]>(initializeBoard())
   const [currentPlayer, setCurrentPlayer] = useState<Color>('WHITE')
   const [selectedSquare, setSelectedSquare] = useState<{x: number, y: number} | null>(null)
 
+  // Nouveau state : vainqueur
+  const [winner, setWinner] = useState<Color | null>(null)
+
   function handleSquareClick(x: number, y: number) {
-    // Reste inchangé, comme avant...
+    // Si la partie est déjà terminée, on ignore les clics
+    if (winner) return
+
     if (!selectedSquare) {
-      // Sélection d'une pièce
+      // Sélection d'une pièce du joueur courant
       const clickedSquare = board[y][x]
       if (clickedSquare.piece?.color === currentPlayer) {
         setSelectedSquare({ x, y })
@@ -26,18 +32,36 @@ export function useChessGame() {
         if (isMoveLegal(board, move)) {
           const newBoard = makeMove(board, move)
           setBoard(newBoard)
-          setCurrentPlayer(currentPlayer === 'WHITE' ? 'BLACK' : 'WHITE')
+
+          // On passe la main à l’autre joueur
+          const nextPlayer = currentPlayer === 'WHITE' ? 'BLACK' : 'WHITE'
+          setCurrentPlayer(nextPlayer)
+
+          // Vérifier si nextPlayer est en échec et mat
+          if (isCheckmate(newBoard, nextPlayer)) {
+            // nextPlayer est mat => currentPlayer gagne
+            setWinner(currentPlayer)
+          }
         }
       }
       setSelectedSquare(null)
     }
   }
 
+  function handleRestart() {
+    setBoard(initializeBoard())
+    setCurrentPlayer('WHITE')
+    setWinner(null)
+    setSelectedSquare(null)
+  }
+
   return {
     board,
     currentPlayer,
     selectedSquare,
+    winner,
     handleSquareClick,
+    handleRestart
   }
 }
 

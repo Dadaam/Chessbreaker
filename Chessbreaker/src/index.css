@@ -80,3 +80,49 @@ h2 {
   /* Ou un background plus visible */
   background-color: #ffd86b !important; 
 }
+
+/* index.css */
+
+/* Overlay du modal : occupe tout l’écran */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  /* Pour être au-dessus de tout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Boîte du modal */
+.modal-content {
+  background: #232323b5;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.modal-content button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-content button:hover {
+  background: #c0392b;
+}
