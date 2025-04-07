@@ -107,10 +107,26 @@ function initializeBoard(): SquareData[][] {
 
   return blank
 }
-
 function makeMove(board: SquareData[][], move: Move): SquareData[][] {
   const newBoard = board.map(row => row.map(cell => ({ ...cell })))
-  newBoard[move.from.y][move.from.x].piece = null
-  newBoard[move.to.y][move.to.x].piece = move.piece
+  const { from, to, piece } = move
+
+  // Gestion du roque (le roi se déplace de deux cases horizontalement)
+  if (piece.type === 'K' && Math.abs(to.x - from.x) === 2) {
+    const row = from.y
+    if (to.x === 6) {
+      // Petit roque : tour de droite (colonne 7) → colonne 5
+      newBoard[row][5].piece = newBoard[row][7].piece
+      newBoard[row][7].piece = null
+    } else if (to.x === 2) {
+      // Grand roque : tour de gauche (colonne 0) → colonne 3
+      newBoard[row][3].piece = newBoard[row][0].piece
+      newBoard[row][0].piece = null
+    }
+  }
+
+  newBoard[to.y][to.x].piece = piece
+  newBoard[from.y][from.x].piece = null
   return newBoard
 }
+
