@@ -1,2 +1,2 @@
 # Chessbreaker
-Chess except that nothing is goes the way you expected.
+Chess except that nothing goes the way you expected.
