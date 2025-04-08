@@ -1,0 +1,89 @@
+{
+    "cards": [
+        {
+        "id": "card001",
+        "name": "Test Card",
+        "description": "Ceci est une carte de test",
+        "type": "action",
+        "DropRate": {
+            "blue" : 0.2
+        },
+        "SubdropRate": { 
+            "pion": 0.3,
+            "tour": 0.2,
+            "fou": 0.15,
+            "cavalier": 0.15,
+            "dame": 0.1,
+            "roi": 0.1
+        },
+        "variantes": "🔵",
+        "duration": null,
+        "stackable": false,
+        "penalty": 1
+        },
+        {
+            "id": "card002",
+            "name": "Test Card",
+            "description": "Ceci est une carte de test",
+            "type": "action",
+            "DropRate": {
+                "yellow" : 0.1
+            },
+            "SubdropRate": { 
+              "pion": 0.3,
+              "tour": 0.2,
+              "fou": 0.15,
+              "cavalier": 0.15,
+              "dame": 0.1,
+              "roi": 0.1
+            },
+            "variantes": "🟡",
+            "duration": null,
+            "stackable": false,
+            "penalty": 1
+          },
+          {
+            "id": "card003",
+            "name": "Test Card",
+            "description": "Ceci est une carte de test",
+            "type": "action",
+            "DropRate": {
+                "red" : 0.01
+            },
+            "SubdropRate": { 
+              "pion": 0.3,
+              "tour": 0.2,
+              "fou": 0.15,
+              "cavalier": 0.15,
+              "dame": 0.1,
+              "roi": 0.1
+            },
+            "variantes": "🔴",
+            "duration": null,
+            "stackable": false,
+            "penalty": 1
+          },
+          {
+            "id": "card004",
+            "name": "Test Card",
+            "description": "Ceci est une carte de test",
+            "type": "action",
+            "DropRate": {
+                "green" : 0.25
+            },
+            "SubdropRate": { 
+              "pion": 0.3,
+              "tour": 0.2,
+              "fou": 0.15,
+              "cavalier": 0.15,
+              "dame": 0.1,
+              "roi": 0.1
+            },
+            "variantes": "🟢",
+            "duration": null,
+            "stackable": false,
+            "penalty": 1
+          }
+    ]
+}
+  

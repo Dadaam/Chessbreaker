@@ -23,12 +23,16 @@ export interface Move {
 }
 
 export interface Card {
-    name: string
-    dropRate: string // ou number (à voir selon si tu préfères "2%" ou 0.02)
-    description: string
-    duration: number | null
-    stackable: boolean
-    cost: number
-  }
-  
+  id: string;
+  name: string;
+  description: string;
+  type: 'action' | 'passive';
+  DropRate: Record<string, number>;
+  SubdropRate?: Record<string, number>;
+  variantes: string;
+  duration: number | null;
+  stackable: boolean;
+  penalty: number;
+}
+
   
